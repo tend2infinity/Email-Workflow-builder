@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     line: {
         borderLeft: '1px solid grey',
-        height: '50px',
+        height: '30px',
         position: 'relative',
         left: '50%',
     },

@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import SyncAltIcon from '@material-ui/icons/SyncAlt';
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
-import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined';
 import DeviceHubOutlinedIcon from '@material-ui/icons/DeviceHubOutlined';
@@ -15,66 +12,57 @@ import { useTheme } from '@material-ui/core/styles';
 import { useStyles } from '../homeComponent/homeStyles';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
-import ActionComponent from './action/home'
 import ConditionComponent from './condition/home'
 import EmailComponent from './email/home'
 import DelayComponent from './delay/home'
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined';
+import { Button } from '@material-ui/core';
+
 
 
 function ModalComponent() {
-
+    const [email, setEmail] = useState(false)
+    const [condition, setCondition] = useState(false)
+    const [delay, setDelay] = useState(false)
     const [modal, setModal] = useState(false)
+    const [endWorkflow, setEndWorkflow] = useState(false)
+    const theme = useTheme();
+    const classes = useStyles(theme);
+
+
+    const toggleEmail = () => {
+        toggleModalClose()
+        setEmail(true)
+    }
+    const toggleCondition = () => {
+        toggleModalClose()
+        setCondition(true)
+
+    }
+    const toggleDelay = () => {
+        toggleModalClose()
+        setDelay(true)
+    }
     const toggleModalOpen = () => {
         setModal(true)
-        console.log(modal)
+
     }
     const toggleModalClose = () => {
         setModal(false)
     }
-    const theme = useTheme();
-    const classes = useStyles(theme);
-    const [email, setEmail] = useState(false)
-    const [condition, setCondition] = useState(false)
-    const [action, setAction] = useState(false)
-    const [delay, setDelay] = useState(false)
-
-    const toggleEmail =() =>{
+    const handleEndWorkflow = () => {
+        setEndWorkflow(true)
         toggleModalClose()
-        setEmail(true)
-        setCondition(false)
-        setAction(false)
-        setDelay(false)
-    }
-    const toggleCondition =() =>{
-        toggleModalClose()
-        setCondition(true)
-        setAction(false)
-        setDelay(false)
-        setEmail(false)
-
-    }
-    const toggleAction =() =>{
-        toggleModalClose()
-        setAction(true)
-        setDelay(false)
-        setEmail(false)
-        setCondition(false)
-    }
-    const toggleDelay =() =>{
-        toggleModalClose()
-        setDelay(true)
-        setEmail(false)
-        setCondition(false)
-        setAction(false)
-    }
-
-    const openModal = () =>{
-        return <Modal />
     }
 
 
     return (
         <div>
+            {console.log("email is", email)}
+            {console.log("delay is", delay)}
+            {console.log("condition is", condition)}
+            {console.log("modal is", modal)}
             <div className={clsx(classes.line)}></div>
             <IconButton className={clsx(classes.iconButton)} onClick={toggleModalOpen}>
                 <ControlPointIcon />
@@ -88,7 +76,6 @@ function ModalComponent() {
                 BackdropProps={{
                     timeout: 500,
                 }}
-
             >
                 <Fade in={modal}>
                     <div className={classes.modalPaper}>
@@ -129,11 +116,12 @@ function ModalComponent() {
                                 onMouseOver={() => (document.getElementById("hoverIcon4").className.baseVal = 'MuiSvgIcon-root MuiSvgIcon-colorPrimary')}
                                 onMouseOut={() => (document.getElementById("hoverIcon4").className.baseVal = 'MuiSvgIcon-root MuiSvgIcon-colorAction')}
                                 className={classes.modalContent}
-                                onClick={toggleAction}>
+                                onClick={handleEndWorkflow}
+                            >
 
                                 <SettingsOutlinedIcon color='action' id="hoverIcon4" />
                                 <Typography style={{ marginTop: '10px' }} color='textSecondary' variant='body1'>
-                                    <b>Action</b></Typography>
+                                    <b>End Workflow</b></Typography>
                             </div>
                         </div>
 
@@ -145,13 +133,31 @@ function ModalComponent() {
 
             </Modal>
             <div className={classes.buttonContainer}>
-            {email && <EmailComponent />}
-            {delay && <DelayComponent />}
-            {condition && <ConditionComponent />}
-            {action && <ActionComponent />}
+                {email && <div> <EmailComponent homeDrawer /> <ModalComponent /></div>}
+                {delay && <div><DelayComponent homeDrawer /> <ModalComponent /></div>}
+                {condition && <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <ConditionComponent homeDrawer />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div style={{ left: '0' }} className={clsx(classes.line)}></div>
+                        <div className={clsx(classes.lineHorizontal)}></div>
+
+                        <div style={{ display: 'flex' }}>
+                            <div><div className={clsx(classes.line)}></div><div className={classes.thumbupIconContainer}><ThumbUpAltOutlinedIcon /></div><ModalComponent /></div>
+                            <div><div className={clsx(classes.line)}></div><div className={classes.thumbdownIconContainer}><ThumbDownOutlinedIcon /> </div><ModalComponent /></div>
+                        </div>
+
+                    </div>
+
+                </div>}
+                {endWorkflow && <div>
+                    <div className={clsx(classes.line)}></div>
+                    <Button variant="outlined" color="default" size="large" >
+                    <Typography variant='body2' color='initial'> Workflow Completed</Typography>
+                    </Button>
+                    </div>}
             </div>
-            
-            
+
+
 
         </div>
 

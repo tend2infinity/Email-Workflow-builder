@@ -25,14 +25,19 @@ const drawerWidth = 350;
         marginLeft: '80px'
     },
     drawerFooter: {
-        marginTop: '180px',
+        marginTop: '480px',
         display: 'flex'
     }, 
     listItemHeader: {
         fontWeight: 'bold',
     },
-    listItemTextField: {
-        width: '300px'
+    listItemTextField1: {
+        flexBasis: '500px',
+        margin: '0 6px'
+    },
+    listItemTextField2: {
+        width: '300px',
+        margin: '0 6px'
     },
     drawerFooterButton:{
         padding: '8px 20px',

@@ -55,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     line: {
         borderLeft: '1px solid grey',
-        height: '50px',
+        height: '30px',
         position: 'relative',
         left: '50%',
     },
@@ -88,18 +88,45 @@ export const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
     },
     modalContent: {
-        padding: '15px',
+        padding: '10px',
         margin: '8px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         flexGrow: '1',
         flexBasis: '0',
-        width: '100px',
+        width: '140px',
         border: '2px solid #A8A8A8', '&:hover' :{
             border: '2px solid #0e70ad' },
         cursor: 'pointer',
         
     },
+     thumbupIconContainer: {
+        padding: '2px 18px',
+        border: '1px solid grey',
+        backgroundColor: '#33cc33',
+        borderRadius: '12px',
+        margin: '0 5px'
+    },
+    thumbdownIconContainer: {
+        padding: '2px 18px',
+        border: '1px solid grey',
+        backgroundColor: '#ff0000',
+        borderRadius: '12px',
+        margin: '0 5px'
+    },
+    lineHorizontal: {
+        borderTop: '1px solid grey',
+        width: '500px',
+        position: 'relative',
+    },
+    lineVertical: {
+        display: 'flex',
+        alignItems:'center',
+        borderRight: '1px solid grey',
+        borderLeft: '1px solid grey',
+        height: '30px',
+    },
+
 
 }));

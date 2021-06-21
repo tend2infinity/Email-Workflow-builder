@@ -20,8 +20,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 function LeftDrawer(props) {
-    console.log(props)
+
     const open = useSelector(state => state.home.open)
     const workflow = useSelector(state => state.home.workflow)
 
@@ -33,14 +34,20 @@ function LeftDrawer(props) {
         dispatch(toggleClose());
         }
 
-    const handleworkflowSave = () => {
-        if(!props.subject || !props.fromName || !props.fromEmail || !props.emailTemplate)
+    const handleEmailSave = () => {
+        if( !props.fromName || !props.fromEmail )
         {
-            toast.error("Fill all the fields!")
+            toast.error("Fill all the required fields!")
+        }else if(props.error) {
+            toast.error("Enter a valid Email!")
         }else{
-            toast.info("Email Details Saved!")
+            toast.info("Email Details saved!")
+            props.handleSave()
         }
-     
+       
+    }
+    const handleEmailCancel = () => {
+        props.handleCancel()
     }
 
 
@@ -77,56 +84,68 @@ function LeftDrawer(props) {
                         size="small"
                         variant="outlined"
                         className={classes.listItemTextField}
-                        required = {true}
                         value={props.subject}
-                        onChange={props.handleSubject}
+                        onChange={props.handleSubjectChange}
                     />
 
-                    {/* <ListItem>
+                    <ListItem>
                         <Typography variant="body1">
                             <ListItemText disableTypography primary="From Name" className={classes.listItemHeader} />
                         </Typography>
                     </ListItem>
                     <TextField
-                        select
-                        label="Select"
-                        helperText="Please select a trigger type"
+                        label="Enter the name of sender"
                         variant="outlined"
                         size="small"
-                        value={props.trigger}
-                        onChange={props.handleTriggerChange}
+                        value={props.fromName}
+                        onChange={props.handleFromChange}
                         className={classes.listItemTextField}
                         required = {true}
-                    >
-                        <MenuItem value="When sunscriber joins a list"> When sunscriber joins a list</MenuItem>
-                        <MenuItem value="The anniversary of a date"> The anniversary of a date</MenuItem>
-                    </TextField>
+                    />
 
                     <ListItem>
                         <Typography variant="body1">
-                            <ListItemText disableTypography primary="Select A List" className={classes.listItemHeader} />
+                            <ListItemText disableTypography primary="From Email" className={classes.listItemHeader} />
+                        </Typography>
+                    </ListItem>
+                    <TextField
+                        error={props.error}
+                        label="Enter the sender's Email"
+                        helperText={props.error ? "Enter a valid Email" : "Valid Email"}
+                        variant="outlined"
+                        size="small"
+                        value={props.fromEmail}
+                        onChange={props.handleFromEmailChange}
+                        className={classes.listItemTextField}
+                        required = {true}
+                    />
+                       <ListItem>
+                        <Typography variant="body1">
+                            <ListItemText disableTypography primary="Select Template" className={classes.listItemHeader} />
                         </Typography>
                     </ListItem>
                     <TextField
                         select
-                        label="Select"
-                        helperText="Please select a list type"
+                        label="Select an Email Template"
                         variant="outlined"
                         size="small"
-                        value={props.list}
-                        onChange={props.handleListChange}
+                        value={props.emailTemplate}
+                        onChange={props.handleTemplateChange}
                         className={classes.listItemTextField}
-                        required = {true}
                     >
-                        <MenuItem value="Default List"> Default List</MenuItem>
-                        <MenuItem value="Customised list">Customised List</MenuItem>
-                    </TextField> */}
+                        <MenuItem value="Template 1"> Template 1</MenuItem>
+                        <MenuItem value="Template 2"> Template 2</MenuItem>
+                        <MenuItem value="Template 3"> Template 3</MenuItem>
+                        <MenuItem value="my template"> My template</MenuItem>
+
+                    </TextField>
+
 
                 </List>
                 <Divider className={classes.drawerFooter} />
                 <div>
-                    <Button variant="contained" color="primary" className={classes.drawerFooterButton} onClick={handleworkflowSave}> Save </Button>
-                    <Button variant="contained" color="secondary" className={classes.drawerFooterButton} onClick={props.handleworkflowCancel}> Cancel</Button>
+                    <Button variant="contained" color="primary" className={classes.drawerFooterButton} onClick={handleEmailSave}> Save </Button>
+                    <Button variant="contained" color="secondary" className={classes.drawerFooterButton} onClick={handleEmailCancel}> Cancel</Button>
 
                 </div>
             </Drawer>

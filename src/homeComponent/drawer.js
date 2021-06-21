@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function LeftDrawer(props) {
-    console.log(props)
+
     const open = useSelector(state => state.home.open)
     const workflow = useSelector(state => state.home.workflow)
     // const workflowName = useSelector(state => state.home.workflowName)
@@ -39,7 +39,7 @@ function LeftDrawer(props) {
     const handleworkflowSave = () => {
         if(!props.name || !props.trigger || !props.list)
         {
-            toast.error("Fill all the fields!")
+            toast.error("Fill all the required fields!")
         }else{
             toast.info("Workflow Initialized!")
             dispatch(toggleWorkflowTrue());

@@ -22,10 +22,11 @@ export default function Home() {
     const dispatch = useDispatch()
     const theme = useTheme();
     const classes = useStyles(theme);
-    
+    const [drawer, setDrawer] = useState(true)
     const [name, setName] = useState('');
     const [trigger, setTrigger] = useState('');
     const [list, setList] = useState('');
+
 
 
     const handleDrawerOpen = () => {
@@ -38,6 +39,15 @@ export default function Home() {
         setTrigger("")
         setList("")
     }
+    // const handleworkflowDelete = () => {
+    //     dispatch(toggleWorkflowFalse())
+    //     setEmail(false)
+    //     setDelay(false)
+    //     setCondition(false)
+    //     setName("")
+    //     setTrigger("")
+    //     setList("")
+    // }
 
     const handleTriggerChange = (event) => {
         setTrigger(event.target.value)
@@ -48,6 +58,16 @@ export default function Home() {
     const handleNameChange = (event) => {
         setName(event.target.value)
     }
+    const handleWorkflowClick = () => {
+        setDrawer(true)
+        // setEmail(false)
+        // setCondition(false)
+        // setDelay(false)
+        handleDrawerOpen()
+        console.log(drawer)
+
+    }
+ 
 
 
     const drawerprops = {
@@ -59,7 +79,17 @@ export default function Home() {
         handleListChange,
         handleNameChange
     }
-
+    // const modalprops = {
+    //     email,
+    //     condition,
+    //     delay,
+    //     modal,
+    //     toggleModalOpen,
+    //     toggleModalClose,
+    //     toggleEmail,
+    //     toggleCondition,
+    //     toggleDelay
+    // }
 
     return (
         <div className={classes.root}>
@@ -84,13 +114,13 @@ export default function Home() {
 
                 </Toolbar>
             </AppBar>
-            <Drawer {...drawerprops} />
+            {drawer && <Drawer {...drawerprops} /> }
             <main
                 className={clsx(classes.content, {
                     [classes.contentShift]: open,
                 })}
             >
-                <Button onClick={handleDrawerOpen} variant="outlined" color="default" size="large">
+                <Button onClick={handleWorkflowClick} variant="outlined" color="default" size="large">
                     <div>
                         {console.log(workflow)}
                         <div className={clsx(workflow && classes.hide)}>Set up Workflow Trigger </div>
@@ -103,12 +133,8 @@ export default function Home() {
 
                 
                 <div className={clsx(!workflow && classes.hide)}>
-                <Modal />
+                <Modal  />
                 </div>
-            
-               
-               
-
 
             </main>
         </div>
