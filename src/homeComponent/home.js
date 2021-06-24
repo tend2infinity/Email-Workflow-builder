@@ -64,7 +64,6 @@ export default function Home() {
         // setCondition(false)
         // setDelay(false)
         handleDrawerOpen()
-        console.log(drawer)
 
     }
  
@@ -122,7 +121,6 @@ export default function Home() {
             >
                 <Button onClick={handleWorkflowClick} variant="outlined" color="default" size="large">
                     <div>
-                        {console.log(workflow)}
                         <div className={clsx(workflow && classes.hide)}>Set up Workflow Trigger </div>
                         <div className={clsx(classes.buttonContainer, !workflow && classes.hide)}>
                             <Typography variant='body2' color='initial'> {trigger}</Typography>

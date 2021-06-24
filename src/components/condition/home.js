@@ -34,7 +34,6 @@ function Home() {
     }
     const handleConditionClick = () => {
         setDrawer(true)
-        console.log(drawer)
     }
     const handleConditionChange = (event) => {
         setCondition(event.target.value)

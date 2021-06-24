@@ -15,7 +15,6 @@ function Home() {
     const dispatch = useDispatch()
     const [timer, setTimer]= useState('')
     const [timerType, setTimerType] = useState('Day(s)')
-    console.log(EmailValidator.validate("test@gmail.com"))
     const theme = useTheme();
     const classes = useStyles(theme);
     const [saved, setSaved] = useState(false)
@@ -36,7 +35,6 @@ function Home() {
     }
     const handleTimerClick = () => {
         setDrawer(true)
-        console.log(drawer)
     }
     const handleTimerChange = (event) => {
         if(event.target.value < 0){

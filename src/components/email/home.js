@@ -29,7 +29,6 @@ function Home() {
     };
 
     const handleSubjectChange = (event) =>{
-        console.log(subject)
         setSubject(event.target.value)
     }
     const handleFromChange = (event) =>{
@@ -56,7 +55,6 @@ function Home() {
     const handleEmailClick = () => {
         setDrawer(true)
         handleDrawerOpen()
-        console.log(drawer)
     }
     const handleError = () => {
         if(EmailValidator.validate(fromEmail))
@@ -90,7 +88,7 @@ function Home() {
                     <EmailOutlinedIcon fontSize='large' color={saved ? 'primary' : 'action'} />
                 </div>
                 <div className={classes.buttonContainer}>
-                <Button variant='outlined' onClick={handleEmailClick} ><Typography varinat='caption' color='textSecondary'>Select Email Template</Typography> </Button>
+                <Button variant='outlined' onClick={handleEmailClick} ><Typography variant='caption' color={saved ? 'inherit' : 'textSecondary'}>Select Email Template</Typography> </Button>
                 </div>
 
             </div>

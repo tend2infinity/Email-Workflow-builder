@@ -59,10 +59,7 @@ function ModalComponent() {
 
     return (
         <div>
-            {console.log("email is", email)}
-            {console.log("delay is", delay)}
-            {console.log("condition is", condition)}
-            {console.log("modal is", modal)}
+ 
             <div className={clsx(classes.line)}></div>
             <IconButton className={clsx(classes.iconButton)} onClick={toggleModalOpen}>
                 <ControlPointIcon />
